@@ -1,0 +1,32 @@
+{% extends "LearningPath/base/base.html" %}
+
+<!-- View Learning Path -->
+
+{% block content %}
+
+<div class="min-h-screen w-full bg-black">
+  <div
+    class="h-full w-full flex flex-col gap-12 items-center justify-center gap-40"
+  >
+    <h1 class="text-5xl text-white mb-12 mt-40">{{path.name}}</h1>
+
+    {% for topic in topics %}
+    <div class="grid w-full md:grid-cols-3 text-white">
+      <div class="flex"></div>
+      <div class="flex items-center justify-center">
+        <div
+          class="h-10 w-10 {% if topic.topic_status == 'pending' %}bg-yellow-500{% elif topic.topic_status == 'completed' %}bg-green-500{% elif topic.topic_status == 'in_progress' %}bg-blue-500{% elif topic.topic_status == 'not_started' %}bg-red-500 {% else %} bg-gray-500 {% endif %} rounded-full"
+        ></div>
+      </div>
+
+      <div class="flex items-center">
+        <hr class="w-12 h-[2px] bg-white" />
+        <h1 class="ml-4">{{topic.topic_name}}</h1>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

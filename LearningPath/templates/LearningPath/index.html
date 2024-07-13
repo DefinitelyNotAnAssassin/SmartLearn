@@ -1,0 +1,142 @@
+{% extends "LearningPath/base/base.html" %}
+
+<!-- Learning Path -->
+
+{% block content %}
+
+<div class="h-screen w-full bg-black">
+  <div class="h-full w-full flex items-center justify-center">
+    <h1 class="text-4xl text-white font-semibold">Choose your path!</h1>
+  </div>
+</div>
+
+<div class="w-full bg-black">
+  <div class="h-full w-full flex flex-col items-center justify-center gap-60">
+    <div
+      class="w-full grid text-center md:grid-cols-3 md:text-start text-white"
+    >
+      <div class="flex justify-center"></div>
+      <div class="flex justify-center items-center">
+        <div class="h-10 w-10 bg-red-500 rounded rounded-lg"></div>
+      </div>
+      <div class="flex flex-col justify-center items-start">
+        <h1
+          class="text-2xl text-white text-center w-full font-semibold md:text-start"
+        >
+          Lorem Ipsum Dolor Sit Amet
+        </h1>
+        <h1 class="text-xl text-white">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
+          voluptate magni corrupti. Similique dolore quas maxime corporis,
+          consequuntur non accusantium impedit dicta architecto molestiae facere
+          explicabo temporibus tempore ipsam ipsa.
+        </h1>
+      </div>
+    </div>
+
+    <div class="w-full grid grid-cols-3 text-white">
+      <div class="flex flex-col justify-center items-start text-center">
+        <h1 class="text-2xl text-white font-semibold w-full">
+          Lorem Ipsum Dolor Sit Amet
+        </h1>
+        <h1 class="text-xl text-white text-justify">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
+          voluptate magni corrupti. Similique dolore quas maxime corporis,
+          consequuntur non accusantium impedit dicta architecto molestiae facere
+          explicabo temporibus tempore ipsam ipsa.
+        </h1>
+      </div>
+      <div class="flex justify-center items-center">
+        <div class="h-10 w-10 bg-orange-500 rounded rounded-lg"></div>
+      </div>
+      <div class="flex justify-start items-center"></div>
+    </div>
+
+    <div class="w-full grid grid-cols-3 text-white">
+      <div class="flex justify-center"></div>
+      <div class="flex justify-center items-center">
+        <div class="h-10 w-10 bg-yellow-500 rounded rounded-lg"></div>
+      </div>
+      <div class="flex flex-col justify-center items-start">
+        <h1 class="text-2xl text-white font-semibold">
+          Lorem Ipsum Dolor Sit Amet
+        </h1>
+        <h1 class="text-xl text-white">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
+          voluptate magni corrupti. Similique dolore quas maxime corporis,
+          consequuntur non accusantium impedit dicta architecto molestiae facere
+          explicabo temporibus tempore ipsam ipsa.
+        </h1>
+      </div>
+    </div>
+
+    <div class="w-full grid grid-cols-3 text-white">
+      <div class="flex flex-col justify-center items-start text-center">
+        <h1 class="text-2xl text-white font-semibold w-full">
+          Lorem Ipsum Dolor Sit Amet
+        </h1>
+        <h1 class="text-xl text-white text-justify">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
+          voluptate magni corrupti. Similique dolore quas maxime corporis,
+          consequuntur non accusantium impedit dicta architecto molestiae facere
+          explicabo temporibus tempore ipsam ipsa.
+        </h1>
+      </div>
+      <div class="flex justify-center items-center">
+        <div class="h-10 w-10 bg-green-500 rounded rounded-lg"></div>
+      </div>
+      <div class="flex justify-start items-center"></div>
+    </div>
+  </div>
+</div>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"
+  integrity="sha512-aNMyYYxdIxIaot0Y1/PLuEu3eipGCmsEUBrUq+7aVyPGMFH8z0eTP0tkqAvv34fzN6z+201d3T8HPb1svWSKHQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const targetElements = document.querySelectorAll(".w-full.grid") // Select all matching elements
+    let animatedElements = new Set() // Keep track of animated elements
+
+    function isInViewport(el) {
+      const rect = el.getBoundingClientRect()
+      return (
+        rect.top <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.bottom >= 0
+      )
+    }
+
+    function runAnimation() {
+      targetElements.forEach((el, index) => {
+        if (isInViewport(el)) {
+          if (!animatedElements.has(index)) {
+            // Check if the element is in view and not animated
+            anime({
+              targets: el,
+              opacity: [0, 1],
+              duration: 800,
+              easing: "easeInOutQuad",
+              begin: function () {
+                animatedElements.add(index) // Mark as animated
+              },
+            })
+          }
+        } else {
+          animatedElements.delete(index) // Remove from animatedElements if not in viewport
+        }
+      })
+    }
+
+    // Initial check in case any element is already in view on load
+    runAnimation()
+
+    // Listen for scroll events
+    window.addEventListener("scroll", runAnimation)
+  })
+</script>
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends "LearningPath/base/base.html" %}
+
+<!-- View Learning Path -->
+
+{% block content %}
+
+<div class="min-h-screen w-full bg-black">
+  <div class="h-full w-full flex flex-col gap-12 items-center justify-center">
+    <h1 class="text-5xl text-white mt-40">My Paths</h1>
+
+    <button
+      class="text-black bg-white font-semibold py-3 px-2 rounded rounded-lg"
+    >
+      Add a Path
+    </button>
+
+    <div class="gap-40 w-full flex flex-col items-center">
+      {% for student_path in paths %}
+      <div class="w-3/4 rounded rounded-lg bg-orange-500 py-8">
+        <div class="ml-3">
+          <h1 class="text-3xl text-white font-semibold">
+            {{student_path.path.name}}
+          </h1>
+          <h1 class="text-xl text-white">{{student_path.path.description}}</h1>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
